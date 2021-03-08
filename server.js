@@ -11,25 +11,25 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.get("/", function(req, res){
-    res.sendFile("./Develop/public/index.html")
+    res.sendFile("./public/index.html")
 })
 
 app.get("/notes", function(req, res){
-    res.sendFile(path.join(__dirname, "./Develop/public/notes.html"))
+    res.sendFile(path.join(__dirname, "./public/notes.html"))
 })
 
 app.get("/api/notes", function(req, res){
-    let allSavedNotes = fs.readFileSync(path.join(__dirname, "./Develop/db/db.json"))
+    let allSavedNotes = fs.readFileSync(path.join(__dirname, "./db/db.json"))
     allSavedNotes = JSON.parse(allSavedNotes)
     res.json(allSavedNotes)
 })
 
 app.post("/api/notes", function(req, res){
-    let allSavedNotes = fs.readFileSync(path.join(__dirname, "./Develop/db/db.json"))
+    let allSavedNotes = fs.readFileSync(path.join(__dirname, "./db/db.json"))
     allSavedNotes = JSON.parse(allSavedNotes)
     allSavedNotes.push(req.body)
     allSavedNotes = JSON.stringify(allSavedNotes)
-    fs.writeFileSync(path.join(__dirname, "./Develop/db/db.json"),allSavedNotes)
+    fs.writeFileSync(path.join(__dirname, "./db/db.json"),allSavedNotes)
     allSavedNotes = JSON.parse(allSavedNotes)
     res.json(allSavedNotes)
 })
